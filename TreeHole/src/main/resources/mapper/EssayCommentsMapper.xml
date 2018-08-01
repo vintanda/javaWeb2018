@@ -1,0 +1,196 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="org.treeHole.mapper.EssayCommentsMapper" >
+  <resultMap id="BaseResultMap" type="org.treeHole.pojo.EssayComments" >
+    <id column="essayid" property="essayid" jdbcType="INTEGER" />
+    <result column="commentsUserId" property="commentsuserid" jdbcType="INTEGER" />
+    <result column="commentstime" property="commentstime" jdbcType="TIMESTAMP" />
+    <result column="commentsInfo" property="commentsinfo" jdbcType="VARCHAR" />
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause" >
+    <where >
+      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    essayid, commentsUserId, commentstime, commentsInfo
+  </sql>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="org.treeHole.pojo.EssayCommentsExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from essayComments
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    from essayComments
+    where essayid = #{essayid,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from essayComments
+    where essayid = #{essayid,jdbcType=INTEGER}
+  </delete>
+  <delete id="deleteByExample" parameterType="org.treeHole.pojo.EssayCommentsExample" >
+    delete from essayComments
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="org.treeHole.pojo.EssayComments" >
+    insert into essayComments (essayid, commentsUserId, commentstime, 
+      commentsInfo)
+    values (#{essayid,jdbcType=INTEGER}, #{commentsuserid,jdbcType=INTEGER}, #{commentstime,jdbcType=TIMESTAMP}, 
+      #{commentsinfo,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="org.treeHole.pojo.EssayComments" >
+    insert into essayComments
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="essayid != null" >
+        essayid,
+      </if>
+      <if test="commentsuserid != null" >
+        commentsUserId,
+      </if>
+      <if test="commentstime != null" >
+        commentstime,
+      </if>
+      <if test="commentsinfo != null" >
+        commentsInfo,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="essayid != null" >
+        #{essayid,jdbcType=INTEGER},
+      </if>
+      <if test="commentsuserid != null" >
+        #{commentsuserid,jdbcType=INTEGER},
+      </if>
+      <if test="commentstime != null" >
+        #{commentstime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="commentsinfo != null" >
+        #{commentsinfo,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="org.treeHole.pojo.EssayCommentsExample" resultType="java.lang.Integer" >
+    select count(*) from essayComments
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map" >
+    update essayComments
+    <set >
+      <if test="record.essayid != null" >
+        essayid = #{record.essayid,jdbcType=INTEGER},
+      </if>
+      <if test="record.commentsuserid != null" >
+        commentsUserId = #{record.commentsuserid,jdbcType=INTEGER},
+      </if>
+      <if test="record.commentstime != null" >
+        commentstime = #{record.commentstime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.commentsinfo != null" >
+        commentsInfo = #{record.commentsinfo,jdbcType=VARCHAR},
+      </if>
+    </set>
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map" >
+    update essayComments
+    set essayid = #{record.essayid,jdbcType=INTEGER},
+      commentsUserId = #{record.commentsuserid,jdbcType=INTEGER},
+      commentstime = #{record.commentstime,jdbcType=TIMESTAMP},
+      commentsInfo = #{record.commentsinfo,jdbcType=VARCHAR}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="org.treeHole.pojo.EssayComments" >
+    update essayComments
+    <set >
+      <if test="commentsuserid != null" >
+        commentsUserId = #{commentsuserid,jdbcType=INTEGER},
+      </if>
+      <if test="commentstime != null" >
+        commentstime = #{commentstime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="commentsinfo != null" >
+        commentsInfo = #{commentsinfo,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where essayid = #{essayid,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="org.treeHole.pojo.EssayComments" >
+    update essayComments
+    set commentsUserId = #{commentsuserid,jdbcType=INTEGER},
+      commentstime = #{commentstime,jdbcType=TIMESTAMP},
+      commentsInfo = #{commentsinfo,jdbcType=VARCHAR}
+    where essayid = #{essayid,jdbcType=INTEGER}
+  </update>
+</mapper>

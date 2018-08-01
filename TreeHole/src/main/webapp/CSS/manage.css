@@ -1,0 +1,42 @@
+body{
+    width: 100%;
+    height: 100%;
+}
+div.main{
+    position: relative;
+    width: 100%;
+    height: 100%;
+}
+div.main_top{
+    position: relative;
+    width: 100%;
+    height: auto;
+}
+div.main_middle{
+    position: relative;
+    width: 100%;
+    height: 600px;
+    border:1px solid black;
+}
+div.main_middle table{
+    position: relative;
+    width: 80%;
+    height: auto;
+    text-align: center;
+}
+div.main_middle table tr{
+    width: 100%;
+    height: auto;
+}
+div.main_middle table tr th{
+    width: 11%;
+    border: 1px solid black;
+}
+div.main_middle table tr td{
+    width: 11%;
+    border: 1px solid black;
+}
+a{
+    text-decoration: none;
+    color: #000
+}
